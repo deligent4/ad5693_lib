@@ -39,10 +39,10 @@ typedef enum{
 typedef struct{
 	bool ref_disable;
 	bool gain_x2;
-	ad5693_operating_mode_e dac_op;
+	ad5693_operating_mode_e mode;
 }ad5693_configuration_t;
 
-extern ad5693_configuration_t ad5693;
+//extern ad5693_configuration_t ad5693;
 
 HAL_StatusTypeDef AD5693_Init(ad5693_configuration_t ad5693);
 
@@ -50,7 +50,8 @@ HAL_StatusTypeDef AD5693_Set_Reg_Voltage(float value);
 HAL_StatusTypeDef AD5693_Update_Reg(void);
 
 HAL_StatusTypeDef AD5693_Set_Voltage(float value);
+HAL_StatusTypeDef AD5693_Set_Voltage_Raw(uint16_t voltage);
 HAL_StatusTypeDef AD5693_Reset(void);
 uint16_t AD5693_Read_Input_Reg(void);
-HAL_StatusTypeDef AD5693_OP_Mode(ad5693_operating_mode_e);
+HAL_StatusTypeDef AD5693_Set_OP_Mode(ad5693_operating_mode_e mode);
 #endif /* INC_AD569X_H_ */

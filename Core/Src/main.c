@@ -45,7 +45,12 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-ad5693_configuration_t ad5693 = {0};
+ad5693_configuration_t ad5693 = {
+		.gain_x2 		= false,
+		.ref_disable	= false,
+		.mode 			= normal_mode,
+
+};
 
 /* USER CODE END PV */
 
@@ -57,7 +62,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void AD5693_Config(void);
+
 /* USER CODE END 0 */
 
 /**
@@ -93,10 +98,11 @@ int main(void)
 
   AD5693_Reset();
   HAL_Delay(10);
-  AD5693_Config();
+  AD5693_Init(ad5693);
   HAL_Delay(10);
-  AD5693_Set_Voltage(2.6);
-//  HAL_Delay(2000);
+//  AD5693_Set_Voltage(2);
+  AD5693_Set_Voltage_Raw(10);
+  HAL_Delay(2000);
 //  AD5693_Reset();
   /* USER CODE END 2 */
 
@@ -109,7 +115,9 @@ int main(void)
 //		  HAL_Delay(500);
 //	  }
 
-
+//	  ad5693.gain_x2 = true;
+//	  AD5693_Init(ad5693);
+	  while(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -157,12 +165,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void AD5693_Config(void){
-	ad5693.gain_x2 		= false;
-	ad5693.ref_disable	= false;
-	ad5693.dac_op 		= normal_mode;
-	AD5693_Init(ad5693);
-}
+
 /* USER CODE END 4 */
 
 /**
